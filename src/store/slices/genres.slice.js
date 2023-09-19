@@ -19,28 +19,28 @@ export const genresSlice = createSlice({
 
 export const getGenresThunk = () => dispatch => {
     dispatch(genericRequestThunk(async () => {
-        const res = await axios.get('https://moviespage.onrender.com/genres');
+        const res = await axios.get('https://peliculasprueba.onrender.com/genres');
         dispatch(setGenres(res.data));
     }))
 }
 
 export const addGenreThunk = (name) => dispatch => {
     dispatch(genericRequestThunk(async () => {
-        const res = await axios.post('https://moviespage.onrender.com/genres', {name});
+        const res = await axios.post('https://peliculasprueba.onrender.com/genres', {name});
         dispatch(addGenre(res.data));
     }))
 }
 
 export const deleteGenreThunk = id => dispatch => {
     dispatch(genericRequestThunk(async () => {
-        await axios.delete(`https://moviespage.onrender.com/genres/${id}`)
+        await axios.delete(`https://peliculasprueba.onrender.com/genres/${id}`)
         dispatch(deleteGenre(id))
     }))
 }
 
 export const updateGenreThunk = (id, name) => dispatch => {
     dispatch(genericRequestThunk(async () => {
-        const res = await axios.put(`https://moviespage.onrender.com/genres/${id}`, {name})
+        const res = await axios.put(`https://peliculasprueba.onrender.com/genres/${id}`, {name})
         dispatch(updateGenre({id, genre: res.data}));
     }))
 }

@@ -20,34 +20,34 @@ export const moviesSlice = createSlice({
 
 export const getMoviesThunk = () => (dispatch) => {
     dispatch(genericRequestThunk(async () => {
-        const res = await axios.get('https://moviespage.onrender.com/movies')
+        const res = await axios.get('https://peliculasprueba.onrender.com/movies')
         dispatch(setMovie(res.data));
     }));
 }
 
 export const addMovieThunk = movie => dispatch => {
     return dispatch(genericRequestThunk(async () => {
-        const { data } = await axios.post('https://moviespage.onrender.com/movies', movie);
-        const { data: genres } = await axios.post(`https://moviespage.onrender.com/movies/${data.id}/genres`, movie.genres);
-        const { data: directors } = await axios.post(`https://moviespage.onrender.com/movies/${data.id}/directors`, movie.directors);
-        const { data: actors } = await axios.post(`https://moviespage.onrender.com/movies/${data.id}/actors`, movie.actors);
+        const { data } = await axios.post('https://peliculasprueba.onrender.com/movies', movie);
+        const { data: genres } = await axios.post(`https://peliculasprueba.onrender.com/movies/${data.id}/genres`, movie.genres);
+        const { data: directors } = await axios.post(`https://peliculasprueba.onrender.com/movies/${data.id}/directors`, movie.directors);
+        const { data: actors } = await axios.post(`https://peliculasprueba.onrender.com/movies/${data.id}/actors`, movie.actors);
         dispatch(addMovie({...data, genres, directors, actors}));
     }, "Movie added successfully"))
 }
 
 export const deleteMovieThunk = id => dispatch => {
     dispatch(genericRequestThunk(async () => {
-        await axios.delete(`https://moviespage.onrender.com/movies/${id}`)
+        await axios.delete(`https://peliculasprueba.onrender.com/movies/${id}`)
         dispatch(deleteMovie(id));
     }, "Movie deleted successfully"))
 }
 
 export const updateMovieThunk = (id, movie) => dispatch => {
     dispatch(genericRequestThunk(async () => {
-        const {data: movieRes} = await axios.put(`https://moviespage.onrender.com/movies/${id}`, movie)
-        const { data: genres } = await axios.post(`https://moviespage.onrender.com/movies/${id}/genres`, movie.genres);
-        const { data: directors } = await axios.post(`https://moviespage.onrender.com/movies/${id}/directors`, movie.directors);
-        const { data: actors } = await axios.post(`https://moviespage.onrender.com/movies/${id}/actors`, movie.actors);
+        const {data: movieRes} = await axios.put(`https://peliculasprueba.onrender.com/movies/${id}`, movie)
+        const { data: genres } = await axios.post(`https://peliculasprueba.onrender.com/movies/${id}/genres`, movie.genres);
+        const { data: directors } = await axios.post(`https://peliculasprueba.onrender.com/movies/${id}/directors`, movie.directors);
+        const { data: actors } = await axios.post(`https://peliculasprueba.onrender.com/movies/${id}/actors`, movie.actors);
         dispatch(updateMovie({id, movie: {...movieRes, genres, directors, actors}}));
     }, "Movie updated succesfully"));
 }
